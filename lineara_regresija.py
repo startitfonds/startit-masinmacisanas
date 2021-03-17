@@ -111,12 +111,13 @@ modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test)
 modela_kvalitate(y_test, rezultats)
 
 # Lietojam modeli, lai prognozetu rezultātu
-dati1 = [1500,1140]
+# var prognozēt vairākas vērtības uzreiz, tādēļ dati ir divdimensiju masīvā
+dati1 = [[1500,1140]]
 dati1_rez = 105
-dati2 = [99.80,176.60,109,24]
+dati2 = [[99.80,176.60,109,24]]
 dati2_rez = 13950
 
-prognoze = prognozejam_rezultatu(modelis, [dati1])
+prognoze = prognozejam_rezultatu(modelis, dati1)
 print(prognoze, dati1_rez)
 
 # print("Ielādējam modeli no datnes")
