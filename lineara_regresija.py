@@ -49,8 +49,8 @@ def parverst_kolonnu(df, kolonna):
 
 def modela_kvalitate(y_test, resultats):
     # Kvalitate virs 0.6 ir OK
-    print(cl('Explained Variance Score: {}'.format(evs(y_test, resultats)), attrs = ['bold']))
-    print(cl('R-Squared: {}'.format(r2(y_test, resultats)), attrs = ['bold']))
+    print(cl('Explained Variance Score (dispersija): {}'.format(evs(y_test, resultats)), 'red', attrs = ['bold']))
+    print(cl('R-Squared (kvadrātiskā novirze): {}'.format(r2(y_test, resultats)), 'red', attrs = ['bold']))
 
 
 def saglabat_modeli(datne, modelis):

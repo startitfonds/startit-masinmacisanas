@@ -1,5 +1,4 @@
 pandas
-pylzma
 numpy
 matplotlib
 seaborn

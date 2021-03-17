@@ -3,7 +3,7 @@ from termcolor import colored as cl # teksta izvade
 
 
 def info(datne):
-    print(cl("\n\nInformācija par datni " + datne, attrs = ['bold']))
+    print(cl("\n\nInformācija par datni " + datne, 'green', attrs = ['reverse']))
     # # importējam datus
     # # df is saīsinajums no Data Frame, 
     # # Pandas bibliotēkas pamata datu struktūras
