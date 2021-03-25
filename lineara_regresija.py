@@ -87,12 +87,15 @@ datne2 = 'dati/auto_imports.csv'
 kol_x2 = ['wheel-base','length','engine-size','city-mpg']
 kol_y2 = 'price'
 
+datne3 = 'dati/ss_auto.csv'
+kol_x3 = ['gads','tilpums','nobraukums']
+kol_y3 = 'cena'
 # Sagatavojam datus no datnes
-X_train, X_test, y_train, y_test = sagatavot_datus(datne1, kol_x1, kol_y1)
+X_train, X_test, y_train, y_test = sagatavot_datus(datne3, kol_x3, kol_y3)
 
 
 # vienkārša lineārā regresija
-modelis = LinearRegression()
+# modelis = LinearRegression()
 # Citi algoritmi ko var lietot:
 # # 2. Ridge
 # modelis = Ridge(alpha = 0.5)
@@ -103,7 +106,7 @@ modelis = LinearRegression()
 # # 5. ElasticNet
 # modelis = ElasticNet(alpha = 0.01)
 # Labāks algoritms
-# modelis = ensemble.GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2, learning_rate = 0.1, loss = 'ls')
+modelis = ensemble.GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2, learning_rate = 0.1, loss = 'ls')
 
 modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test)
 # # Ja gribam saglabāt modeli datnē
@@ -116,9 +119,12 @@ dati1 = [[1500,1140]]
 dati1_rez = 105
 dati2 = [[99.80,176.60,109,24]]
 dati2_rez = 13950
+dati3 = [[2008,1.6,176]]
+dati3_rez = 3350
 
-prognoze = prognozejam_rezultatu(modelis, dati1)
-print(prognoze, dati1_rez)
+prognoze = prognozejam_rezultatu(modelis, dati3)
+precizitate = (prognoze-dati3_rez)/dati3_rez * 100
+print("Prognoze:", prognoze, dati3_rez, "kļūda:", precizitate, "%")
 
 # print("Ielādējam modeli no datnes")
 # modelis2 = ieladet_modeli("modelis.pickle")

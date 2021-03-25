@@ -89,6 +89,9 @@ def info(datne):
             elif dzinejs == "E":
                 auto["dzinejs"] = "Elektro"
                 auto["tilpums"] = 0
+            elif dzinejs[-1] == "H":
+                auto["dzinejs"] = "Hibrīds"
+                auto["tilpums"] = dzinejs[:-1]
             else:
                 auto["dzinejs"] = "Benzīns"
                 auto["tilpums"] = dzinejs
@@ -143,4 +146,4 @@ def izvelkam_datus(cik):
 # # solis 3
 # atvelkam_lapas(200)
 # # solis 4
-# izvelkam_datus(200)
+izvelkam_datus(200)
