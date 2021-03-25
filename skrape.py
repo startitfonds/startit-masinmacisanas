@@ -120,19 +120,19 @@ def saglaba_datus(dati):
 def atvelkam_lapas(cik):
     # pirmajai lapai ir savādāka adrese
     url = "https://www.ss.lv/lv/transport/cars/today-5/sell/"
-    saglaba(url, "{}page1.html".format(LAPAS, i))
+    saglaba(url, "{}page1.html".format(LAPAS))
     time.sleep(1)
 
-    for i in range(cik):
+    for i in range(2, cik+1):
         url = "https://www.ss.lv/lv/transport/cars/today-5/sell/page{}.html".format(i)
         saglaba(url, "{}page{}.html".format(LAPAS, i))
         time.sleep(1)
 
 
 
-def izvelkam_datus():
+def izvelkam_datus(cik):
     visi_dati = []
-    for i in range(1, 21):
+    for i in range(1, cik+1):
         datne = "{}page{}.html".format(LAPAS, i)
         
         datnes_dati = info(datne)
@@ -141,6 +141,6 @@ def izvelkam_datus():
 
 
 # # solis 3
-# atvelkam_lapas(cik)
+# atvelkam_lapas(200)
 # # solis 4
-# izvelkam_datus()
+# izvelkam_datus(200)
