@@ -17,7 +17,7 @@ def info(datne):
 
     # # aplūkojam statistisku informāciju
     # print(cl("\nStatistika", attrs = ['bold']))
-    # print(df.describe())
+    print(df.describe())
 
     # print(cl("\nDatu tipi", attrs = ['bold']))
     # aplūkojam datu tipus
@@ -25,12 +25,12 @@ def info(datne):
 
     # # parāda, kur datos ir tukšas vērtības
     # print(cl("\nTukšas vērtības datos", attrs = ['bold']))
-    # print(df.isnull().sum())
+    print(df.isnull().sum())
 
 
 
 datne1 = 'dati/auto_simple.csv'
 datne2 = 'dati/auto_imports.csv'
-
+datne3 = 'dati/ss_auto.csv'
 # parādām informāciju par datnē esošajiem datiem
-info(datne1)
+info(datne3)

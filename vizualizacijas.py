@@ -51,10 +51,12 @@ def izkliedes_grafiks(datne, x, y, saglabat=False):
 
 datne1 = 'dati/auto_simple.csv'
 datne2 = 'dati/auto_imports.csv'
-
-karstuma_karte(datne1, True)
-# sadalijuma_grafiks(datne2, "price")
+datne3 = 'dati/ss_auto.csv'
+# karstuma_karte(datne3, False)
+# sadalijuma_grafiks(datne3, "cena")
+# sadalijuma_grafiks(datne3, "nobraukums")
 # izkliedes_grafiks(datne1, 'Volume', 'CO2')
 # izkliedes_grafiks(datne1, 'Weight', 'CO2')
 # izkliedes_grafiks(datne1, 'Volume', 'Weight')
-# izkliedes_grafiks(datne2, 'price', 'make')
+# izkliedes_grafiks(datne3, 'cena', 'razotajs')
+# izkliedes_grafiks(datne3, 'nobraukums', 'razotajs')

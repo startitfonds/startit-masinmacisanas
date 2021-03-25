@@ -1,3 +1,5 @@
+import warnings
+warnings.simplefilter("ignore")
 import pandas as pd # datu apstrāde
 import numpy as np  # darbs ar masīviem
 from termcolor import colored as cl # teksta izvade
@@ -22,7 +24,7 @@ def sagatavot_datus(datne, kolonnas_x, kolonnas_y):
     df = pd.read_csv(datne)
 
     # reizēm nepieciešams izmest datus, kur ir tukšas vērtības
-    # df.dropna(inplace = True)
+    df.dropna(inplace = True)
     # vai arī aizpildīt tukšos datus ar 0
     # df = df.fillna(0)
 
@@ -79,56 +81,60 @@ def prognozejam_rezultatu(modelis, dati):
     return rezultats
 
 
-datne1 = 'dati/auto_simple.csv'
-kol_x1 = ['Volume','Weight']
-kol_y1 = 'CO2'
+def main():
+    datne1 = 'dati/auto_simple.csv'
+    kol_x1 = ['Volume','Weight']
+    kol_y1 = 'CO2'
 
-datne2 = 'dati/auto_imports.csv'
-kol_x2 = ['wheel-base','length','engine-size','city-mpg']
-kol_y2 = 'price'
+    datne2 = 'dati/auto_imports.csv'
+    kol_x2 = ['wheel-base','length','engine-size','city-mpg']
+    kol_y2 = 'price'
 
-datne3 = 'dati/ss_auto.csv'
-kol_x3 = ['gads','tilpums','nobraukums']
-kol_y3 = 'cena'
-# Sagatavojam datus no datnes
-X_train, X_test, y_train, y_test = sagatavot_datus(datne3, kol_x3, kol_y3)
+    datne3 = 'dati/ss_auto.csv'
+    kol_x3 = ['gads','tilpums','nobraukums']
+    kol_y3 = 'cena'
+    # Sagatavojam datus no datnes
+    X_train, X_test, y_train, y_test = sagatavot_datus(datne3, kol_x3, kol_y3)
 
 
-# vienkārša lineārā regresija
-# modelis = LinearRegression()
-# Citi algoritmi ko var lietot:
-# # 2. Ridge
-# modelis = Ridge(alpha = 0.5)
-# # 3. Lasso
-# modelis = Lasso(alpha = 0.01)
-# # 4. Bayesian
-# modelis = BayesianRidge()
-# # 5. ElasticNet
-# modelis = ElasticNet(alpha = 0.01)
-# Labāks algoritms
-modelis = ensemble.GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2, learning_rate = 0.1, loss = 'ls')
+    # vienkārša lineārā regresija
+    # modelis = LinearRegression()
+    # Citi algoritmi ko var lietot:
+    # # 2. Ridge
+    # modelis = Ridge(alpha = 0.5)
+    # # 3. Lasso
+    # modelis = Lasso(alpha = 0.01)
+    # # 4. Bayesian
+    # modelis = BayesianRidge()
+    # # 5. ElasticNet
+    # modelis = ElasticNet(alpha = 0.01)
+    # Labāks algoritms
+    modelis = ensemble.GradientBoostingRegressor(n_estimators = 400, max_depth = 5, min_samples_split = 2, learning_rate = 0.1, loss = 'ls')
 
-modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test)
-# # Ja gribam saglabāt modeli datnē
-# modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test, "modelis.pickle")
-modela_kvalitate(y_test, rezultats)
+    modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test)
+    # # Ja gribam saglabāt modeli datnē
+    # modelis, rezultats = trenet_modeli(modelis, X_train, y_train, X_test, "modelis.pickle")
+    modela_kvalitate(y_test, rezultats)
 
-# Lietojam modeli, lai prognozetu rezultātu
-# var prognozēt vairākas vērtības uzreiz, tādēļ dati ir divdimensiju masīvā
-dati1 = [[1500,1140]]
-dati1_rez = 105
-dati2 = [[99.80,176.60,109,24]]
-dati2_rez = 13950
-dati3 = [[2008,1.6,176]]
-dati3_rez = 3350
+    # Lietojam modeli, lai prognozetu rezultātu
+    # var prognozēt vairākas vērtības uzreiz, tādēļ dati ir divdimensiju masīvā
+    dati1 = [[1500,1140]]
+    dati1_rez = 105
+    dati2 = [[99.80,176.60,109,24]]
+    dati2_rez = 13950
+    dati3 = [[2008,1.6,176]]
+    dati3_rez = 3350
 
-prognoze = prognozejam_rezultatu(modelis, dati3)
-precizitate = (prognoze-dati3_rez)/dati3_rez * 100
-print("Prognoze:", prognoze, dati3_rez, "kļūda:", precizitate, "%")
+    prognoze = prognozejam_rezultatu(modelis, dati3)
+    precizitate = (prognoze-dati3_rez)/dati3_rez * 100
+    print("Prognoze:", prognoze, dati3_rez, "kļūda:", precizitate, "%")
 
-# print("Ielādējam modeli no datnes")
-# modelis2 = ieladet_modeli("modelis.pickle")
-# rezultats2 = modelis2.predict(X_test)
-# modela_kvalitate(y_test, rezultats2)
-# prognoze = prognozejam_rezultatu(modelis2, [dati1])
-# print(prognoze, dati1_rez)
+    # print("Ielādējam modeli no datnes")
+    # modelis2 = ieladet_modeli("modelis.pickle")
+    # rezultats2 = modelis2.predict(X_test)
+    # modela_kvalitate(y_test, rezultats2)
+    # prognoze = prognozejam_rezultatu(modelis2, [dati1])
+    # print(prognoze, dati1_rez)
+
+
+main()

@@ -73,13 +73,14 @@ def info(datne):
             # dažāds formatējums
             if lauki[3].b:
                 if lauki[3].b.br:
-                    lauki[3].b.br.replace_with(' ')
+                    lauki[3].b.br.replace_with('!')
                 auto["marka"] = lauki[3].b.text
             else:
                 if lauki[3].br:
-                    lauki[3].br.replace_with(' ')
+                    lauki[3].br.replace_with('!')
                 auto["marka"] = lauki[3].text
-            auto["razotajs"] = auto["marka"].split(" ")[0]
+            auto["razotajs"] = auto["marka"].split("!")[0]
+            auto["marka"] = auto["marka"].replace("!", " ")
             auto["gads"] = lauki[4].text
             # izvelkama dzinēja tipu no tilpuma lauka
             dzinejs = lauki[5].text
@@ -99,7 +100,7 @@ def info(datne):
             if not lauki[6].text =="-":
                 auto["nobraukums"] = lauki[6].text.replace(" tūkst.","")
             else:
-                auto["nobraukums"] = 0
+                auto["nobraukums"] = ""
             # pārvēršam par skaitlisku vērtību
             auto["cena"] = int(lauki[7].text.replace("  €", "").replace(",",""))
             dati.append(auto)
@@ -110,14 +111,15 @@ def info(datne):
 
 
 def saglaba_datus(dati):
-    with open(DATI+'ss_auto.csv', 'a') as f:
+    with open(DATI+'ss_auto.csv', 'w') as f:
         lauku_nosaukumi = ['razotajs', 'marka', 'gads', 'dzinejs', 'tilpums', 'nobraukums', 'cena', 'apraksts', 'bilde', 'saite']
         w = csv.DictWriter(f, fieldnames=lauku_nosaukumi)
         w.writeheader()
         for auto in dati:
             w.writerow(auto)
 
-# info(LAPAS + "pirma.html")
+# d1 = info(LAPAS + "pirma.html")
+# saglaba_datus(d1)
 
 
 def atvelkam_lapas(cik):
@@ -146,4 +148,4 @@ def izvelkam_datus(cik):
 # # solis 3
 # atvelkam_lapas(200)
 # # solis 4
-izvelkam_datus(200)
+# izvelkam_datus(200)
