@@ -9,15 +9,15 @@ def info(datne):
     # # Pandas bibliotēkas pamata datu struktūras
     df = pd.read_csv(datne)
     # # apskatīt pirmās 5 datu rindiņas
-    print(cl("\nPirmās 5 rindiņas", attrs = ['bold']))
-    print(df.head(5))
+    # print(cl("\nPirmās 5 rindiņas", attrs = ['bold']))
+    # print(df.head(5))
     # # aplūkojam kolonnu nosaukumus
     # print(cl("\nKolonnu nosaukumi", attrs = ['bold']))
     # print(df.columns)
 
     # # aplūkojam statistisku informāciju
     # print(cl("\nStatistika", attrs = ['bold']))
-    print(df.describe())
+    # print(df.describe())
 
     # print(cl("\nDatu tipi", attrs = ['bold']))
     # aplūkojam datu tipus
@@ -25,8 +25,12 @@ def info(datne):
 
     # # parāda, kur datos ir tukšas vērtības
     # print(cl("\nTukšas vērtības datos", attrs = ['bold']))
-    print(df.isnull().sum())
+    # print(df.isnull().sum())
 
+    # Vairāk statistikas piemēru
+    # print(df['razotajs'].value_counts())
+    # print(df.groupby('razotajs').mean())
+    # print(df.groupby(['razotajs', 'gads']).mean())
 
 
 datne1 = 'dati/auto_simple.csv'
