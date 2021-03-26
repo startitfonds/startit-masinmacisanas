@@ -137,4 +137,5 @@ def main():
     # print(prognoze, dati1_rez)
 
 
-main()
+if __name__ == "__main__":
+    main()
